@@ -208,6 +208,7 @@ html[lang="zh-CN"] .lang button[data-l="zh"],html[lang="en"] .lang button[data-l
   placeholders();
   if(window.MutationObserver){new MutationObserver(placeholders).observe(de,{attributes:true,attributeFilter:['lang']})}
 
+  function clean(x){return String(x||'').replace(/[|\[\]\r\n]+/g,' ').replace(/\s+/g,' ').trim()}
   function done(){box.className='lead done';try{box.scrollIntoView({behavior:'smooth',block:'center'})}catch(e){}}
   function fail(){show('fail')}
 
@@ -230,6 +231,7 @@ html[lang="zh-CN"] .lang button[data-l="zh"],html[lang="en"] .lang button[data-l
       var sendWith=function(i){
         var p={access_key:keys[i],subject:'QO event lead: '+d.name,from_name:'QO China Event Landing Page',key_slot:String(i+1)};
         for(var k in d){p[k]=d[k]}
+        p.lead_row='[[QO||'+clean(d.name)+'||'+clean(d.company)+'||'+clean(d.wechat)+'||'+clean(d.email)+']]';   /* one tidy line for the Excel flow to read */
         return fetch(CONFIG.endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(p),signal:ctrl?ctrl.signal:undefined})
           .then(function(r){return r.text()})
           .then(function(t){var j=null;try{j=JSON.parse(t)}catch(e){}
