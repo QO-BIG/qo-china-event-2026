@@ -69,6 +69,31 @@ html[lang="zh-CN"] .lang button[data-l="zh"],html[lang="en"] .lang button[data-l
 .facts .rule{width:44px;height:3px;background:var(--green);border-radius:2px;margin:0 auto 12px}
 .foot{margin-top:auto;padding-top:24px;text-align:center;font-size:12.5px;color:var(--muted);line-height:1.7}
 .foot a{color:var(--navy);font-weight:600}
+
+.lead{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 18px 18px;box-shadow:0 2px 10px rgba(15,42,82,.06)}
+.lead h2{font-size:21px;line-height:1.3;font-weight:700;color:var(--navy)}
+.lead .sub{margin-top:4px;font-size:13.5px;color:var(--muted)}
+.lead form{margin-top:14px;display:grid;gap:12px}
+.field label{display:block;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:5px}
+.field label .req{color:#c0392b;margin-left:2px}
+.field label small{font-weight:500;color:var(--muted);margin-left:6px;font-size:12px}
+.field input{width:100%;font:inherit;font-size:16px;padding:11px 13px;min-height:46px;border:1.5px solid var(--line);border-radius:12px;background:#f8fafd;color:var(--ink);-webkit-appearance:none;appearance:none}
+.field input::placeholder{color:#97a3b8}
+.field input:focus{outline:none;border-color:var(--green);background:#fff;box-shadow:0 0 0 3px rgba(30,154,74,.18)}
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.submit{font:inherit;font-size:16px;font-weight:700;color:#fff;background:var(--green);border:0;border-radius:999px;min-height:50px;width:100%;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.submit:disabled{opacity:.6;cursor:default}
+.lead .note{font-size:12px;line-height:1.55;color:var(--muted)}
+.msg{display:none;font-size:14px;line-height:1.5;border-radius:12px;padding:10px 12px}
+.msg.err{display:block;background:#fdecec;color:#9b1c1c}
+.msg.err a{color:#9b1c1c;font-weight:700;text-decoration:underline}
+.thanks{display:none;text-align:center;padding:10px 4px 6px}
+.thanks .tick{width:46px;height:46px;border-radius:50%;background:var(--green-soft);color:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.thanks .tick svg{width:24px;height:24px}
+.thanks h3{font-size:19px;color:var(--navy);font-weight:700}
+.thanks p{margin-top:6px;font-size:14px;color:var(--muted)}
+.lead.done form,.lead.done .head{display:none}
+.lead.done .thanks{display:block}
 @media (prefers-reduced-motion:reduce){.card{transition:none}}
 @media (max-width:340px){.leaflet .txt{padding-right:100px}.leaflet .thumb{width:84px;height:134px}.card h2{font-size:21px}}
 </style>
@@ -113,6 +138,33 @@ html[lang="zh-CN"] .lang button[data-l="zh"],html[lang="en"] .lang button[data-l
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
     </a>
   </main>
+  <section class="lead" id="lead">
+    <div class="head">
+      <h2 class="serif zh">留下您的联系方式</h2><h2 class="serif en">Leave your details</h2>
+      <p class="sub zh">我们将在活动结束后与您联系。</p><p class="sub en">We will get in touch with you after the event.</p>
+    </div>
+    <form id="leadForm" novalidate autocomplete="on">
+      <div class="field"><label for="f_name"><span class="zh">姓名</span><span class="en">Name</span><span class="req">*</span></label>
+        <input id="f_name" name="name" type="text" autocomplete="name" data-ph-zh="您的姓名" data-ph-en="Your name"></div>
+      <div class="field"><label for="f_company"><span class="zh">公司名称</span><span class="en">Company name</span><small class="zh">选填</small><small class="en">optional</small></label>
+        <input id="f_company" name="company" type="text" autocomplete="organization" data-ph-zh="公司全称" data-ph-en="Your company"></div>
+      <div class="field"><label for="f_wechat"><span class="zh">微信号</span><span class="en">WeChat ID</span><span class="req">*</span></label>
+        <input id="f_wechat" name="wechat" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" data-ph-zh="您的微信号" data-ph-en="Your WeChat ID"></div>
+      <div class="field"><label for="f_email"><span class="zh">电子邮箱</span><span class="en">Email</span><small class="zh">选填</small><small class="en">optional</small></label>
+        <input id="f_email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" data-ph-zh="name@company.com" data-ph-en="name@company.com"></div>
+      <div class="hp" aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+      <div id="leadMsg" class="msg" role="alert"></div>
+      <button id="leadBtn" class="submit" type="submit"><span class="zh">提交</span><span class="en">Submit</span></button>
+      <p class="note zh">提交即表示您同意 QO 就我们的服务与您联系。</p>
+      <p class="note en">By submitting, you agree that QO may contact you about our services.</p>
+    </form>
+    <div class="thanks" role="status">
+      <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h3 class="serif zh">谢谢您！</h3><h3 class="serif en">Thank you!</h3>
+      <p class="zh">我们已收到您的信息，会尽快与您联系。</p><p class="en">We have received your details and will be in touch soon.</p>
+    </div>
+  </section>
+
 
   <div class="facts">
     <div class="rule"></div>
@@ -127,6 +179,79 @@ html[lang="zh-CN"] .lang button[data-l="zh"],html[lang="en"] .lang button[data-l
 </div>
 <script>
 (function(){
+  /* ====== PASTE YOUR WEB3FORMS ACCESS KEYS HERE ======
+     Put up to 3 keys (each made with a DIFFERENT email address) between the quotes.
+     The page uses the first key; if Web3Forms says it is full, it tries the next one automatically.
+     Empty quotes are ignored.                                                              */
+  var CONFIG = { endpoint: "https://api.web3forms.com/submit", accessKeys: ["7cfa6862-cb78-4c28-9a56-89bcab7a8b38", "", ""] };
+  /* ================================================================= */
+
+  var de=document.documentElement,
+      f=document.getElementById('leadForm'), box=document.getElementById('lead'),
+      msg=document.getElementById('leadMsg'), btn=document.getElementById('leadBtn');
+  if(!f) return;
+  function lang(){return de.getAttribute('lang')==='en'?'en':'zh'}
+  var T={
+    required:{zh:'请填写姓名和微信号。',en:'Please enter your name and WeChat ID.'},
+    email:{zh:'邮箱格式似乎不正确，请检查。',en:'The email address looks incorrect. Please check it.'},
+    fail:{zh:'提交未成功，可能是网络较慢。请稍后重试，或直接添加我们的微信（<a href="eleaflet.html#contact">点此查看</a>）。',
+          en:'Sorry, that did not go through. Please try again, or add us on WeChat (<a href="eleaflet.html#contact">see here</a>).'},
+    notset:{zh:'表单尚未连接，请联系管理员。',en:'The form is not connected yet. Please contact the administrator.'}
+  };
+  function show(k){msg.innerHTML=T[k][lang()];msg.className='msg err'}
+  function placeholders(){
+    var els=f.querySelectorAll('[data-ph-zh]');
+    for(var i=0;i<els.length;i++){els[i].setAttribute('placeholder',els[i].getAttribute('data-ph-'+lang()))}
+    if(msg.className.indexOf('err')>-1 && msg.getAttribute('data-k')){msg.innerHTML=T[msg.getAttribute('data-k')][lang()]}
+  }
+  var _show=show; show=function(k){msg.setAttribute('data-k',k);_show(k)};
+  placeholders();
+  if(window.MutationObserver){new MutationObserver(placeholders).observe(de,{attributes:true,attributeFilter:['lang']})}
+
+  function done(){box.className='lead done';try{box.scrollIntoView({behavior:'smooth',block:'center'})}catch(e){}}
+  function fail(){show('fail')}
+
+  f.addEventListener('submit',function(e){
+    e.preventDefault(); msg.className='msg'; msg.removeAttribute('data-k');
+    var el=f.elements;
+    if(el['website'].value){return}                       /* honeypot: bots only */
+    var d={name:el['name'].value.trim(),company:el['company'].value.trim(),wechat:el['wechat'].value.trim(),email:el['email'].value.trim()};
+    if(!d.name||!d.wechat){show('required');return}
+    if(d.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)){show('email');return}
+    var web3=CONFIG.endpoint.indexOf('web3forms.com')>-1;
+    var keys=[]; if(web3){var ks=CONFIG.accessKeys||[]; for(var q=0;q<ks.length;q++){if(ks[q]&&String(ks[q]).trim()){keys.push(String(ks[q]).trim())}}}
+    if(!CONFIG.endpoint||(web3&&!keys.length)){show('notset');return}
+    d.language=lang(); d.submitted_at=new Date().toISOString(); d.source='QO China event 2026 landing page';
+    btn.disabled=true;
+    var ctrl=('AbortController' in window)?new AbortController():null;
+    var timer=setTimeout(function(){if(ctrl)ctrl.abort()},15000);
+    var req;
+    if(web3){
+      var sendWith=function(i){
+        var p={access_key:keys[i],subject:'QO event lead: '+d.name,from_name:'QO China Event Landing Page',key_slot:String(i+1)};
+        for(var k in d){p[k]=d[k]}
+        return fetch(CONFIG.endpoint,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(p),signal:ctrl?ctrl.signal:undefined})
+          .then(function(r){return r.text()})
+          .then(function(t){var j=null;try{j=JSON.parse(t)}catch(e){}
+            if(j&&j.success){return}
+            var err=new Error('rejected');err.server=true;throw err});   /* server answered "no" (e.g. monthly limit) */
+      };
+      var tryKey=function(i){
+        return sendWith(i).catch(function(err){
+          if(err&&err.server&&i+1<keys.length){return tryKey(i+1)}      /* only fail over when the server answered; network errors stop here */
+          throw err;
+        });
+      };
+      req=tryKey(0);
+    }else{
+      req=fetch(CONFIG.endpoint,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(d),signal:ctrl?ctrl.signal:undefined});
+    }
+    req.then(done).catch(fail).then(function(){clearTimeout(timer);btn.disabled=false});
+  });
+})();
+</script>
+<script>
+(function(){
   var de=document.documentElement, KEY='qo-lang';
   function set(l,save){
     de.setAttribute('lang', l==='en'?'en':'zh-CN');
@@ -135,7 +260,7 @@ html[lang="zh-CN"] .lang button[data-l="zh"],html[lang="en"] .lang button[data-l
   }
   var saved=null; try{saved=localStorage.getItem(KEY)}catch(e){}
   var nav=(navigator.language||'zh').toLowerCase();
-  set(saved || (nav.indexOf('zh')===0 ? 'zh' : 'en'), false);
+  set(saved || 'zh', false);
   var bs=document.querySelectorAll('.lang button');
   for(var i=0;i<bs.length;i++){bs[i].addEventListener('click',function(){set(this.getAttribute('data-l'),true)})}
 })();
